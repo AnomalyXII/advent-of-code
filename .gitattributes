@@ -1,0 +1,2 @@
+day*.txt filter=git-crypt diff=git-crypt
+day*-test.txt filter=git diff=git

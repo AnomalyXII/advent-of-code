@@ -1,0 +1,10 @@
+
+dependencies {
+    api project(':framework-core')
+    runtimeOnly project(':aoc2020')
+    runtimeOnly project(':aoc2021')
+    runtimeOnly project(':aoc2022')
+    runtimeOnly project(':aoc2023')
+
+    implementation group: 'net.sourceforge.argparse4j', name: 'argparse4j', version: '0.9.0'
+}

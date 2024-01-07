@@ -1,0 +1,5 @@
+dependencies {
+    annotationProcessor project(':codegen-annotation-processor')
+
+    api project(':framework-core')
+}
