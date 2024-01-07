@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <title>AnomalyXII's Advent of Code</title>
+    <script type='text/javascript'>
+
+        const CHALLENGES = {};
+        const CHALLENGE_DATA = {};
+        const CHALLENGE_SOLUTIONS = {};
+
+        /*
+         * Convenient way of returning a completed `Promise`.
+         */
+        const i_promise = function (result) {
+            return new Promise(function (resolve, _) {
+                resolve(result);
+            });
+        }
+
+        /*
+         * Slightly hacky way to remove all children from an element.
+         */
+        const reset = function (element) {
+            element.textContent = '';
+        }
+
+        /*
+         * Display a loading message whilst, you know, stuff loads...
+         */
+        const update_main_panel = async function (action) {
+            const loading_el = document.getElementById('loading');
+            const challenge_details_el = document.getElementById('challenge-details');
+            loading_el.setAttribute('style', 'display: block');
+            challenge_details_el.setAttribute('style', 'display: none')
+            try {
+                reset(challenge_details_el);
+                challenge_details_el.appendChild(await action());
+            } finally {
+                challenge_details_el.setAttribute('style', 'display: block');
+                loading_el.setAttribute('style', 'display: none');
+            }
+        }
+
+        /*
+         * Load ALL the challenges.
+         */
+        const load_all_challenges = function () {
+            if (Object.keys(CHALLENGES).length !== 0)
+                return i_promise(CHALLENGES);
+
+            return fetch('/all')
+                    .then(async response => {
+                        const challenges = await response.json()
+
+                        // Group by year
+                        challenges.forEach(challenge => {
+                            CHALLENGES[challenge.year] ||= [];
+                            CHALLENGES[challenge.year].push(challenge);
+                        });
+
+                        return CHALLENGES;
+                    });
+        };
+
+        /*
+         * Load a specific challenge.
+         */
+        const load_challenge_details = function (year, day) {
+            const key = `${year}-${day}`;
+            if (CHALLENGE_DATA[key] !== undefined)
+                return i_promise(CHALLENGE_DATA[key]);
+
+            return fetch(`/${year}/${day}`)
+                    .then(async response => {
+                        CHALLENGE_DATA[key] = await response.json();
+                        return CHALLENGE_DATA[key];
+                    });
+        }
+
+        /*
+         * Load a specific challenge.
+         */
+        const load_challenge_result = function (year, day, part) {
+            const key = `${year}-${day}-${part}`;
+            if (CHALLENGE_SOLUTIONS[key] !== undefined)
+                return i_promise(CHALLENGE_SOLUTIONS[key]);
+
+            return fetch(`/${year}/${day}/${part}`)
+                    .then(async response => {
+                        CHALLENGE_SOLUTIONS[key] = await response.json();
+                        return CHALLENGE_SOLUTIONS[key];
+                    });
+        }
+
+        /*
+         * Display the navigation bar.
+         */
+        const show_navigation_bar = function () {
+            const challenge_list_el = document.getElementById('challenge-list');
+            reset(challenge_list_el);
+
+            load_all_challenges()
+                    .then(challenges_by_year => {
+                        const overview_link = document.createElement('a');
+                        overview_link.onclick = function () {
+                            show_overview();
+                        };
+                        overview_link.setAttribute('href', '#');
+                        overview_link.innerText = 'Overview';
+
+                        const overview_node = document.createElement('li');
+                        overview_node.appendChild(overview_link);
+                        challenge_list_el.appendChild(overview_node);
+
+                        Object.entries(challenges_by_year).forEach(([year, challenges]) => {
+                            const section_el = document.createElement('li');
+                            const section_heading_el = document.createElement('h3');
+                            section_heading_el.innerText = year;
+                            section_el.appendChild(section_heading_el);
+                            challenge_list_el.appendChild(section_el);
+
+                            challenges.forEach(challenge => {
+                                const link_el = document.createElement('a');
+                                link_el.onclick = function () {
+                                    show_challenge_details(challenge.year, challenge.day);
+                                };
+                                link_el.setAttribute('href', '#');
+                                link_el.innerText = `${challenge.day} ${challenge.title}`;
+
+                                const node_el = document.createElement('li');
+                                node_el.appendChild(link_el);
+                                challenge_list_el.appendChild(node_el);
+                            });
+                        });
+                    });
+        }
+
+        /*
+         * Display the overview screen.
+         */
+        const show_overview = function () {
+            update_main_panel(() => {
+                return load_all_challenges()
+                        .then(challenges_by_year => {
+                            const overview_el = document.createElement('div');
+
+                            const title_el = document.createElement('h2');
+                            title_el.innerText = 'Overview';
+                            overview_el.appendChild(title_el);
+
+                            const overview_heading_el = document.createElement('h2');
+                            overview_heading_el.innerText = 'Overview';
+
+                            const overview_table_el = document.createElement('table');
+
+                            Object.entries(challenges_by_year).forEach(([year, challenges]) => {
+                                const year_heading_el = document.createElement('tr');
+                                year_heading_el.setAttribute('class', 'header-row');
+                                const year_heading_banner_el = document.createElement('th');
+                                year_heading_banner_el.setAttribute('colspan', '8');
+                                year_heading_banner_el.innerText = year;
+                                year_heading_el.appendChild(year_heading_banner_el);
+                                overview_table_el.appendChild(year_heading_el);
+
+                                const heading_row_el = document.createElement('tr');
+                                heading_row_el.setAttribute('class', 'header-row');
+                                const year_heading_col_el = document.createElement('th');
+                                year_heading_col_el.innerText = 'Year';
+                                heading_row_el.appendChild(year_heading_col_el);
+                                const day_heading_col_el = document.createElement('th');
+                                day_heading_col_el.innerText = 'Day';
+                                heading_row_el.appendChild(day_heading_col_el);
+                                const title_heading_col_el = document.createElement('th');
+                                title_heading_col_el.innerText = 'Title';
+                                heading_row_el.appendChild(title_heading_col_el);
+                                const part1_heading_col_el = document.createElement('th');
+                                part1_heading_col_el.setAttribute('colspan', '2');
+                                part1_heading_col_el.innerText = 'Part 1 Solution';
+                                heading_row_el.appendChild(part1_heading_col_el);
+                                const part2_heading_col_el = document.createElement('th');
+                                part2_heading_col_el.setAttribute('colspan', '2');
+                                part2_heading_col_el.innerText = 'Part 2 Solution';
+                                heading_row_el.appendChild(part2_heading_col_el);
+                                overview_table_el.appendChild(heading_row_el);
+
+                                challenges.forEach(challenge => {
+                                    const row_el = document.createElement('tr');
+                                    const year_col_el = document.createElement('td');
+                                    year_col_el.innerText = challenge.year;
+                                    row_el.appendChild(year_col_el);
+                                    const day_col_el = document.createElement('td');
+                                    day_col_el.innerText = challenge.day;
+                                    row_el.appendChild(day_col_el);
+                                    const title_col_el = document.createElement('td');
+                                    title_col_el.innerText = challenge.title;
+                                    row_el.appendChild(title_col_el);
+
+                                    const part1_col_el = document.createElement('td');
+                                    part1_col_el.innerText = 'Loading...';
+                                    row_el.appendChild(part1_col_el);
+                                    const part1_duration_col_el = document.createElement('td');
+                                    part1_duration_col_el.innerText = '';
+                                    row_el.appendChild(part1_duration_col_el);
+
+                                    const part2_col_el = document.createElement('td');
+                                    part2_col_el.innerText = 'Loading...';
+                                    row_el.appendChild(part2_col_el);
+                                    const part2_duration_col_el = document.createElement('td');
+                                    part2_duration_col_el.innerText = '';
+                                    row_el.appendChild(part2_duration_col_el);
+
+                                    load_challenge_result(challenge.year, challenge.day, 1)
+                                            .then(async result => {
+                                                part1_col_el.innerText = result.result;
+                                                part1_duration_col_el.innerText = `${result.duration}ms`
+                                            });
+
+                                    load_challenge_result(challenge.year, challenge.day, 2)
+                                            .then(async result => {
+                                                part2_col_el.innerText = result.result;
+                                                part2_duration_col_el.innerText = `${result.duration}ms`
+                                            });
+
+                                    overview_table_el.appendChild(row_el);
+                                });
+                            });
+                            overview_el.appendChild(overview_table_el);
+
+                            return overview_el;
+                        });
+            });
+        }
+
+        /*
+         * Show the data of a specific challenge.
+         */
+        const show_challenge_details = function (year, day) {
+            update_main_panel(() => {
+                return load_challenge_details(year, day)
+                        .then(details => {
+                            const container_el = document.createElement('div');
+
+                            const title_el = document.createElement('h2');
+                            title_el.innerText = `${details.year} Day ${details.day}: ${details.title}`;
+                            container_el.appendChild(title_el);
+
+                            const part1_title_el = document.createElement('h3');
+                            part1_title_el.innerText = 'Part 1'
+                            const part1_description_el = document.createElement('p');
+                            part1_description_el.innerHTML = details.part1Description;
+                            const part1_el = document.createElement('article');
+                            part1_el.appendChild(part1_title_el);
+                            part1_el.appendChild(part1_description_el);
+                            container_el.appendChild(part1_el);
+
+                            const part2_title_el = document.createElement('h3');
+                            part2_title_el.innerText = 'Part 2'
+                            const part2_description_el = document.createElement('p');
+                            part2_description_el.innerHTML = details.part2Description;
+                            const part2_el = document.createElement('article');
+                            part2_el.appendChild(part2_title_el);
+                            part2_el.appendChild(part2_description_el);
+                            container_el.appendChild(part2_el);
+
+                            return container_el;
+                        });
+            });
+        };
+
+        // And they're off!
+        window.onload = async function () {
+            await load_all_challenges(); // Lazy way to prevent a race
+            show_navigation_bar();
+            show_overview();
+        };
+
+    </script>
+    <style>
+        html, body {
+            max-width: 100%;
+            max-height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        #page {
+            max-width: 100%;
+            max-height: 100%;
+            display: flex;
+            flex-flow: column;
+            flex-wrap: wrap;
+            padding: 0;
+            margin: 0;
+        }
+
+        #title {
+            background: #cccccc;
+            max-width: 100%;
+            flex-grow: 0;
+            margin: 0;
+            padding: 0.5em 1em;
+            border-bottom: solid #666666;
+        }
+
+        #main {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+        }
+
+        #challenges {
+            min-width: 20%;
+            flex-grow: 0;
+            padding-left: 1em;
+            margin-right: 1em;
+            border-right: solid #666666;
+        }
+
+        #challenges ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #content {
+            flex-grow: 1;
+        }
+
+        #loading {
+            display: block;
+        }
+
+        #challenge-details {
+            display: none;
+        }
+
+        tr.header-row {
+            background-color: #cccccc;
+        }
+
+        pre {
+            display: inline-block;
+            background-color: #cccccc;
+            border: 1px solid #666666;
+            padding: 2px;
+        }
+    </style>
+</head>
+<body>
+<section id='page'>
+    <h1 id='title'> Advent of Code </h1>
+    <section id='main'>
+        <nav id='challenges'>
+            <h2>Navigation</h2>
+            <ul id='challenge-list'>
+            </ul>
+        </nav>
+        <section id='content'>
+            <div id='loading'>Loading data...</div>
+            <div id='challenge-details'></div>
+        </section>
+    </section>
+</section>
+</body>
+</html>

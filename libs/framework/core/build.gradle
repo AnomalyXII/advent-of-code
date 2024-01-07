@@ -1,0 +1,5 @@
+
+dependencies {
+    api project(':codegen-annotations')
+    api project(':framework-utils')
+}

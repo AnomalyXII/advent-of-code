@@ -1,0 +1,29 @@
+//
+// Advent of Code
+//
+
+rootProject.name = 'advent-of-code'
+
+// Framework-y bits
+module('codegen-annotations', 'libs/codegen/annotations')
+module('codegen-annotation-processor', 'libs/codegen/processor')
+module('framework-utils', 'libs/framework/utils')
+module('framework-core', 'libs/framework/core')
+
+// Front-ends
+module('runner-cli', 'libs/runner/cli')
+module('runner-vertx', 'libs/runner/vertx')
+
+// Solutions
+module('aoc2020', 'solutions/aoc2020')
+module('aoc2021', 'solutions/aoc2021')
+module('aoc2022', 'solutions/aoc2022')
+module('aoc2023', 'solutions/aoc2023')
+
+/*
+ * Import a module with the given name and path.
+ */
+def module(String name, String path) {
+    include path
+    project(':' + path).name = name
+}

@@ -1,0 +1,14 @@
+final vertxVersion = '4.5.0'
+
+dependencies {
+    api project(':framework-core')
+    runtimeOnly project(':aoc2020')
+    runtimeOnly project(':aoc2021')
+    runtimeOnly project(':aoc2022')
+    runtimeOnly project(':aoc2023')
+
+    implementation group: 'io.vertx', name: 'vertx-web', version: vertxVersion
+    implementation group: 'io.vertx', name: 'vertx-web-templ-thymeleaf', version: vertxVersion
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.0'
+    runtimeOnly group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.7'
+}
