@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class Day13Test {
 
     private static final SolutionContext EXAMPLE = SolutionContext.builder()
-            .example(2021, 13)
+            .example(13)
             .withLetterSet(new BoxLetterSet())
             .build();
     private static final SolutionContext LIVE = SolutionContext.live(2021, 13);

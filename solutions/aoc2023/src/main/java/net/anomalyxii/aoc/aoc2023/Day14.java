@@ -38,7 +38,7 @@ public class Day14 {
      */
     @Part(part = I)
     public int calculateAnswerForPart1(final SolutionContext context) {
-        final Grid.MutableGrid grid = Grid.parseMutable(context.stream());
+        final Grid.MutableGrid grid = context.readMutableGrid();
         tilt(grid, Direction.UP);
 
         return grid.stream()
@@ -55,7 +55,7 @@ public class Day14 {
      */
     @Part(part = II)
     public int calculateAnswerForPart2(final SolutionContext context) {
-        final Grid.MutableGrid grid = Grid.parseMutable(context.stream());
+        final Grid.MutableGrid grid = context.readMutableGrid();
 
         final Map<Integer, Integer> loopDetection = new HashMap<>();
         for (int i = 0; i < NUMBER_OF_ITERATIONS; i++) {
@@ -93,7 +93,7 @@ public class Day14 {
      */
     @Optimised
     public IntTuple calculateAnswers(final SolutionContext context) {
-        final Grid.MutableGrid grid = Grid.parseMutable(context.stream());
+        final Grid.MutableGrid grid = context.readMutableGrid();
 
         tilt(grid, Direction.NORTH);
 

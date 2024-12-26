@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="SolutionsGenerator" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processor name="net.anomalyxii.aoc.annotations.SolutionGenerator" />
+        <module name="advent-of-code.solutions.aoc2020.main" />
+        <module name="advent-of-code.solutions.aoc2021.main" />
+        <module name="advent-of-code.solutions.aoc2022.main" />
+        <module name="advent-of-code.solutions.aoc2023.main" />
+        <module name="advent-of-code.solutions.aoc2024.main" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="21" />
+  </component>
+</project>

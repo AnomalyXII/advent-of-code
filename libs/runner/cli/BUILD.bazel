@@ -1,0 +1,20 @@
+#
+# Runner: Command Line
+#
+
+load(
+    "@//build:modules/modules.bzl",
+    "artifact",
+    "aoc_binary",
+)
+
+aoc_binary(
+    name = "cli",
+    main_class = "net.anomalyxii.aoc.AdventOfCode",
+    deps = [
+        "//libs/framework/core",
+        artifact("net.sourceforge.argparse4j:argparse4j"),
+    ],
+    runtime_deps = ["//:all-solutions"],
+)
+

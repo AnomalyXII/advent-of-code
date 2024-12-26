@@ -62,7 +62,7 @@ public class Day23 {
      */
     @Optimised
     public IntTuple calculateAnswers(final SolutionContext context) {
-        final Grid map = Grid.parse(context.stream());
+        final Grid map = context.readGrid();
 
         final Coordinate start = IntStream.range(0, map.width())
                 .mapToObj(x -> new Coordinate(x, 0))
@@ -93,7 +93,7 @@ public class Day23 {
             final SolutionContext context,
             final boolean ignoreSlopes
     ) {
-        final Grid map = Grid.parse(context.stream());
+        final Grid map = context.readGrid();
 
         final Coordinate start = IntStream.range(0, map.width())
                 .mapToObj(x -> new Coordinate(x, 0))
@@ -202,7 +202,7 @@ public class Day23 {
         do {
             path.add(head);
 
-            final Direction slop = ignoreSlopes ? null : direction(map.get(head));
+            final Direction slop = ignoreSlopes ? null : Direction.fromChar(map.get(head));
             head = walk(map, head, slop, path);
 
             if (junctions.containsKey(head)) {
@@ -225,20 +225,6 @@ public class Day23 {
                 .findFirst()
                 .orElse(null);
 
-    }
-
-    /*
-     * Map a map symbol to a `Direction`.
-     */
-    private static Direction direction(final int symbol) {
-        return switch (symbol) {
-            case '^' -> Direction.UP;
-            case 'v' -> Direction.DOWN;
-            case '>' -> Direction.RIGHT;
-            case '<' -> Direction.LEFT;
-            case '.' -> null;
-            default -> throw new IllegalStateException("Invalid map symbol: " + symbol);
-        };
     }
 
     // ****************************************

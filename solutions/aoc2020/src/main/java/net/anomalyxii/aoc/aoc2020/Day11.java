@@ -32,7 +32,7 @@ public class Day11 {
      */
     @Part(part = I)
     public long calculateAnswerForPart1(final SolutionContext context) {
-        final MutableGrid seatingPlan = Grid.parseMutable(context.stream(), c -> c);
+        final MutableGrid seatingPlan = context.readMutableGrid(c -> c);
 
         final AtomicLong occupiedSeats = new AtomicLong();
         whileSeatsAreInFlux(() -> {
@@ -56,7 +56,7 @@ public class Day11 {
      */
     @Part(part = II)
     public long calculateAnswerForPart2(final SolutionContext context) {
-        final MutableGrid seatingPlan = Grid.parseMutable(context.stream(), c -> c);
+        final MutableGrid seatingPlan = context.readMutableGrid(c -> c);
 
         final AtomicLong occupiedSeats = new AtomicLong(0);
         whileSeatsAreInFlux(() -> {

@@ -1,0 +1,12 @@
+#
+# Framework: Utilities
+#
+
+load("@//build:modules/modules.bzl", "aoc_library")
+
+aoc_library(
+    name = "utils-ocr",
+    deps = [
+        "//libs/framework/utils-geometry",
+    ],
+)

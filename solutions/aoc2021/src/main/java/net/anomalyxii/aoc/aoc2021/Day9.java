@@ -33,7 +33,7 @@ public class Day9 {
      */
     @Part(part = I)
     public long calculateAnswerForPart1(final SolutionContext context) {
-        final Grid heightMap = Grid.parse(context.stream(), chr -> chr - '0');
+        final Grid heightMap = context.readGrid(chr -> chr - '0');
 
         final LongAccumulator sum = new LongAccumulator(Long::sum, 0);
         heightMap.forEachMatching(
@@ -52,7 +52,7 @@ public class Day9 {
      */
     @Part(part = II)
     public long calculateAnswerForPart2(final SolutionContext context) {
-        final Grid heightMap = Grid.parse(context.stream(), chr -> chr - '0');
+        final Grid heightMap = context.readGrid(chr -> chr - '0');
 
         final List<Long> basinSizes = new ArrayList<>();
         heightMap.forEachMatching(

@@ -1,0 +1,12 @@
+#
+# MODULE.bazel - common definitions
+#
+
+module(
+    name = "advent-of-code",
+    version = "2024.12",
+)
+
+include("//build:cc.MODULE.bazel")
+
+include("//build:java.MODULE.bazel")

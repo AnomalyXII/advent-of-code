@@ -30,18 +30,26 @@ public class ResourceBasedContext extends StreamBasedContext {
     // ****************************************
 
     @Override
-    protected BufferedReader openReader() throws FileNotFoundException {
-        final InputStream resource = ResourceBasedContext.class.getClassLoader().getResourceAsStream(datafile);
-        if (resource == null) {
-            throw new FileNotFoundException("Failed to open datafile: 'classpath:/" + datafile + "'");
-        }
-
-        return new BufferedReader(new InputStreamReader(resource, StandardCharsets.UTF_8));
+    protected String describe() {
+        return datafile;
     }
 
     @Override
-    protected String describe() {
-        return datafile;
+    protected BufferedInputStream openStream() throws IOException {
+        final InputStream resource = ResourceBasedContext.class.getClassLoader().getResourceAsStream(datafile);
+        if (resource == null)
+            throw new FileNotFoundException("Failed to open datafile: 'classpath:/" + datafile + "'");
+
+        return new BufferedInputStream(resource);
+    }
+
+    @Override
+    protected BufferedReader openReader() throws FileNotFoundException {
+        final InputStream resource = ResourceBasedContext.class.getClassLoader().getResourceAsStream(datafile);
+        if (resource == null)
+            throw new FileNotFoundException("Failed to open datafile: 'classpath:/" + datafile + "'");
+
+        return new BufferedReader(new InputStreamReader(resource, StandardCharsets.UTF_8));
     }
 
 }

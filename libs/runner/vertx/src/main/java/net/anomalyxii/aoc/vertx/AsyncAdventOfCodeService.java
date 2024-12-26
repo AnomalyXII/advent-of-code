@@ -44,7 +44,7 @@ class AsyncAdventOfCodeService implements AdventOfCodeService {
         return vertx.executeBlocking(
                 () -> SOLUTION_LOADER.allChallenges().stream()
                         .sorted()
-                        .map(JsonObject::mapFrom)
+                        .map(AsyncAdventOfCodeService::toJson)
                         .toList(),
                 false
         );
@@ -55,7 +55,7 @@ class AsyncAdventOfCodeService implements AdventOfCodeService {
         return vertx.executeBlocking(
                 () -> SOLUTION_LOADER.allChallengesForYear(year).stream()
                         .sorted()
-                        .map(JsonObject::mapFrom)
+                        .map(AsyncAdventOfCodeService::toJson)
                         .toList(),
                 false
         );
@@ -65,7 +65,8 @@ class AsyncAdventOfCodeService implements AdventOfCodeService {
     public Future<JsonObject> retrieveChallengeInfo(final int year, final int day) {
         return vertx.executeBlocking(
                 () -> SOLUTION_LOADER.findChallenge(year, day)
-                        .map(JsonObject::mapFrom).orElseThrow(() -> new IllegalArgumentException("Challenge not found")),
+                        .map(AsyncAdventOfCodeService::toJson)
+                        .orElseThrow(() -> new IllegalArgumentException("Challenge not found")),
                 false
         );
     }
@@ -118,6 +119,21 @@ class AsyncAdventOfCodeService implements AdventOfCodeService {
         }
 
         return new JsonObject(fields);
+    }
+
+    /*
+     * Convert a `Challenge` to a `JsonObject`.
+     */
+    private static JsonObject toJson(final Challenge<?, ?> obj) {
+        final JsonObject object = new JsonObject();
+        object.put("year", obj.year());
+        object.put("day", obj.day());
+        object.put("title", obj.title());
+        object.put("part1Description", "<p>" + obj.part1Description());
+        object.put("part2Description", "<p>" + obj.part2Description());
+        System.out.println(obj.part1Description());
+        System.out.println(obj.part2Description());
+        return object;
     }
 
 }

@@ -1,0 +1,28 @@
+#
+# Runner: Vert.x
+#
+
+load(
+    "@//build:modules/modules.bzl",
+    "artifact",
+    "aoc_binary",
+)
+
+aoc_binary(
+    name = "vertx",
+    main_class = "net.anomalyxii.aoc.AdventOfCode",
+    deps = [
+        "//libs/framework/core",
+        artifact("org.slf4j:slf4j-api"),
+        artifact("io.vertx:vertx-core"),
+        artifact("io.vertx:vertx-web"),
+        artifact("io.vertx:vertx-web-common"),
+        artifact("io.vertx:vertx-web-templ-thymeleaf"),
+    ],
+    runtime_deps = [
+        "//:all-solutions",
+        artifact("org.slf4j:slf4j-simple"),
+        artifact("com.fasterxml.jackson.core:jackson-databind")
+    ]
+)
+

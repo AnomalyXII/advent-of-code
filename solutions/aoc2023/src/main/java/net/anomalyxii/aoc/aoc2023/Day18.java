@@ -64,8 +64,8 @@ public class Day18 {
     public LongTuple calculateAnswers(final SolutionContext context) {
         final List<Instruction> instructions = Instruction.process(context);
         return new LongTuple(
-            calculateArea(instructions, Instruction::toVelocity),
-            calculateArea(instructions, Instruction::toHexVelocity)
+                calculateArea(instructions, Instruction::toVelocity),
+                calculateArea(instructions, Instruction::toHexVelocity)
         );
     }
 

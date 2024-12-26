@@ -46,7 +46,7 @@ public class Day24 {
      */
     @Part(part = II)
     public long calculateAnswerForPart2(final SolutionContext context) {
-        final Grid grid = Grid.parse(context.stream());
+        final Grid grid = context.readGrid();
 
         final Coordinate entrance = new Coordinate(1, 0); // TODO: maybe don't hardcode this...
         assert grid.get(entrance) == '.';
@@ -70,7 +70,7 @@ public class Day24 {
      * `Blizzards`, plus the entrance and the exit.
      */
     private static Map extractMap(final SolutionContext context) {
-        final Grid grid = Grid.parse(context.stream());
+        final Grid grid = context.readGrid();
 
         final Coordinate entrance = new Coordinate(1, 0); // TODO: maybe don't hardcode this...
         assert grid.get(entrance) == '.';

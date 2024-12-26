@@ -10,11 +10,10 @@ import net.anomalyxii.aoc.utils.geometry.Direction;
 import net.anomalyxii.aoc.utils.geometry.Grid;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.PriorityQueue;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static net.anomalyxii.aoc.annotations.Part.PartNumber.I;
 import static net.anomalyxii.aoc.annotations.Part.PartNumber.II;
@@ -42,7 +41,7 @@ public class Day17 {
      */
     @Part(part = I)
     public int calculateAnswerForPart1(final SolutionContext context) {
-        final Grid grid = Grid.parse(context.stream(), c -> c - '0');
+        final Grid grid = context.readGrid(c -> c - '0');
         final Memo memo = Memo.forCrucible(grid);
         return solve(grid, memo);
     }
@@ -55,7 +54,7 @@ public class Day17 {
      */
     @Part(part = II)
     public int calculateAnswerForPart2(final SolutionContext context) {
-        final Grid grid = Grid.parse(context.stream(), c -> c - '0');
+        final Grid grid = context.readGrid(c -> c - '0');
 
         final Memo memo = Memo.forUltraCrucible(grid);
         return solve(grid, memo);
@@ -73,7 +72,7 @@ public class Day17 {
      */
     @Optimised
     public IntTuple calculateAnswers(final SolutionContext context) {
-        final Grid grid = Grid.parse(context.stream(), c -> c - '0');
+        final Grid grid = context.readGrid(c -> c - '0');
 
         final Memo part1 = Memo.forCrucible(grid);
         final Memo part2 = Memo.forUltraCrucible(grid);
@@ -93,8 +92,8 @@ public class Day17 {
         final Coordinate from = grid.min();
         final Coordinate to = grid.max();
 
-        memo.dist[from.y()][from.x()][Direction.DOWN.ordinal()][0] = 0;
-        memo.dist[from.y()][from.x()][Direction.RIGHT.ordinal()][0] = 0;
+        memo.dist[memo.offset(from, Direction.DOWN, 0)] = 0;
+        memo.dist[memo.offset(from, Direction.RIGHT, 0)] = 0;
 
         final PriorityQueue<CoordinateWithPriority> queue = new PriorityQueue<>(CoordinateWithPriority.COMPARATOR);
         queue.add(prio(from, Direction.DOWN, 0, 0));
@@ -172,7 +171,7 @@ public class Day17 {
     /*
      * Holds memoised data for calculating the shortest path.
      */
-    private record Memo(int[][][][] dist, Coordinate[][][][] prev, int min, int max) {
+    private record Memo(int[] dist, Coordinate[] prev, int width, int min, int max) {
 
         // Helper Methods
 
@@ -213,26 +212,41 @@ public class Day17 {
         }
 
         /*
+         * Wrap the given `Coordinate` and `Priority` into a
+         * `CoordinateWithPriority`.
+         */
+        int offset(
+                final Coordinate coordinate,
+                final Direction direction,
+                final int count
+        ) {
+            final int cidx = coordinate.y() * width + coordinate.x();
+            final int didx = cidx * 4 + direction.ordinal();
+            final int boundary = (max - min) + 1;
+            assert count >= 0 && count <= boundary : "Count: 0 <= " + count + " <= " + boundary;
+            return (didx * boundary) + count;
+        }
+
+        /*
          * Get the currently set priority of a given `Coordinate`.
          */
         int get(final CoordinateWithPriority next) {
-            return dist[next.coordinate.y()][next.coordinate.x()][next.direction.ordinal()][next.count];
+            return dist[offset(next.coordinate, next.direction, next.count)];
         }
 
         /*
          * Update the memo with the result of a given visit.
          */
         void update(final Coordinate current, final CoordinateWithPriority next) {
-            dist[next.coordinate.y()][next.coordinate.x()][next.direction.ordinal()][next.count] = next.priority;
-            prev[next.coordinate.y()][next.coordinate.x()][next.direction.ordinal()][next.count] = current;
+            dist[offset(next.coordinate, next.direction, next.count)] = next.priority;
+            prev[offset(next.coordinate, next.direction, next.count)] = current;
         }
 
         /*
          * Return the length of the shortest path to the destination cell.
          */
         int shortestPath(final Coordinate to) {
-            return Stream.of(this.dist[to.y()][to.x()])
-                    .flatMapToInt(IntStream::of)
+            return Arrays.stream(dist, offset(to, Direction.UP, 0), offset(to, Direction.RIGHT, (max - min) + 1))
                     .min()
                     .orElseThrow();
         }
@@ -258,38 +272,14 @@ public class Day17 {
          * travel distance in any direction.
          */
         private static Memo forMinMaxDistance(final Grid grid, final int min, final int max) {
-
             final int distanceSize = (max - min) + 1;
-            final int[][][][] dist = (int[][][][]) Array.newInstance(
-                    int.class,
-                    grid.height(),
-                    grid.width(),
-                    4,
-                    distanceSize
-            );
+            final int size = grid.height() * grid.width() * 4 * distanceSize;
+            final int[] dist = (int[]) Array.newInstance(int.class, size);
+            final Coordinate[] prev = (Coordinate[]) Array.newInstance(Coordinate.class, size);
 
-            final Coordinate[][][][] prev = (Coordinate[][][][]) Array.newInstance(
-                    Coordinate.class,
-                    grid.height(),
-                    grid.width(),
-                    4,
-                    distanceSize
-            );
-
-            grid.forEach(point -> {
-                dist[point.y()][point.x()] = new int[4][];
-                prev[point.y()][point.x()] = new Coordinate[4][];
-                for (final Direction direction : Direction.values()) {
-                    dist[point.y()][point.x()][direction.ordinal()] = new int[distanceSize];
-                    prev[point.y()][point.x()][direction.ordinal()] = new Coordinate[distanceSize];
-                    for (int i = 0; i < distanceSize; i++) {
-                        dist[point.y()][point.x()][direction.ordinal()][i] = NO_VAL;
-                        prev[point.y()][point.x()][direction.ordinal()][i] = null;
-                    }
-                }
-            });
-
-            return new Memo(dist, prev, min, max);
+            Arrays.fill(dist, NO_VAL);
+            Arrays.fill(prev, null);
+            return new Memo(dist, prev, grid.width(), min, max);
         }
     }
 

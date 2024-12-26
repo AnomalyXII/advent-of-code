@@ -1,0 +1,33 @@
+#
+# Runner: AoC Bench
+#
+
+load(
+    "@//build:modules/modules.bzl",
+    "artifact",
+    "aoc_library",
+)
+
+load("@rules_java//java:defs.bzl", "java_binary")
+
+aoc_library(
+    name = "lib",
+    deps = [
+        "//libs/framework/core",
+        "//:all-solutions",
+    ],
+)
+
+java_binary(
+    name = "benchmarker",
+    main_class = "net.anomalyxii.aoc.AdventOfCode",
+    data = ["//:all-inputs"],
+    runtime_deps = [":lib"],
+)
+
+java_binary(
+    name = "answer-gen",
+    main_class = "net.anomalyxii.aoc.AnswerGenerator",
+    data = ["//:all-inputs"],
+    runtime_deps = [":lib"],
+)

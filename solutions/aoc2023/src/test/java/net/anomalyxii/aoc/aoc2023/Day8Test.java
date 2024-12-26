@@ -8,9 +8,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class Day8Test {
 
-    private static final SolutionContext EXAMPLE = SolutionContext.example(2023, 8);
-    private static final SolutionContext EXAMPLE_2 = SolutionContext.example(2023, 8, 2);
-    private static final SolutionContext EXAMPLE_3 = SolutionContext.example(2023, 8, 3);
+    private static final SolutionContext EXAMPLE = SolutionContext.example(8);
+    private static final SolutionContext EXAMPLE_2 = SolutionContext.example(8, 2);
+    private static final SolutionContext EXAMPLE_3 = SolutionContext.example(8, 3);
     private static final SolutionContext LIVE = SolutionContext.live(2023, 8);
 
     // ****************************************

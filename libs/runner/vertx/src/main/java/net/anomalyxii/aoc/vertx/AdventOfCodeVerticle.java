@@ -16,6 +16,7 @@ public class AdventOfCodeVerticle extends AbstractVerticle {
     // ****************************************
     // Private Members
     // ****************************************
+
     private final HttpServer httpServer;
 
     // ****************************************

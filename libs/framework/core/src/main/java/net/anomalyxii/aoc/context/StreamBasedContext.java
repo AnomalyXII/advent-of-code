@@ -1,16 +1,19 @@
 package net.anomalyxii.aoc.context;
 
+import net.anomalyxii.aoc.utils.geometry.Grid;
+import net.anomalyxii.aoc.utils.geometry.Grid.MutableGrid;
 import net.anomalyxii.aoc.utils.ocr.LetterSet;
 import net.anomalyxii.aoc.utils.ocr.OCR;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.IntUnaryOperator;
 import java.util.stream.Stream;
 
 /**
@@ -43,10 +46,10 @@ public abstract class StreamBasedContext implements SolutionContext {
 
     @Override
     public String readLine() {
-        return readAllLines()
-                .stream()
-                .findFirst()
-                .orElseThrow(() -> new IllegalStateException("Expected one line from the data file, but nothing was read!"));
+        final List<String> lines = readAllLines();
+        if (lines.isEmpty())
+            throw new IllegalStateException("Expected one line from the data file, but nothing was read!");
+        return lines.getFirst();
     }
 
     @Override
@@ -61,42 +64,84 @@ public abstract class StreamBasedContext implements SolutionContext {
 
     @Override
     public <T> T processLine(final Function<String, T> processor) {
-        return processSingleLineDataFile(processor)
-                .orElseThrow(() -> new IllegalStateException("Expected one line from the data file, but nothing was read!"));
+        return processor.apply(readSingleLine());
     }
 
     @Override
     public void consume(final Consumer<String> consumer) {
-        readAllLines().forEach(consumer);
+        try (BufferedReader in = openReader()) {
+            in.lines().forEach(consumer);
+        } catch (final IOException e) {
+            throw new IllegalArgumentException("An error occurred whilst processing '" + describe() + "'", e);
+        }
     }
 
     @Override
     public Stream<String> stream() {
-        return readAllLines().stream();
+        return streamAllLines();
     }
 
     @Override
     public Stream<List<String>> streamBatches() {
         final Stream.Builder<List<String>> builder = Stream.builder();
 
-        final List<String> lines = readAllLines();
+        try (BufferedReader reader = openReader()) {
+            String line;
+            List<String> currentBatch = null;
+            while ((line = reader.readLine()) != null) {
+                if (line.isBlank()) {
+                    currentBatch = null;
+                    continue;
+                }
 
-        List<String> currentBatch = null;
-        for (final String line : lines) {
-            if (line.isBlank()) {
-                currentBatch = null;
-                continue;
+                if (currentBatch == null) {
+                    currentBatch = new ArrayList<>();
+                    builder.add(currentBatch);
+                }
+
+                currentBatch.add(line);
             }
 
-            if (currentBatch == null) {
-                currentBatch = new ArrayList<>();
-                builder.add(currentBatch);
-            }
-
-            currentBatch.add(line);
+            return builder.build();
+        } catch (final IOException e) {
+            throw new IllegalArgumentException("An error occurred whilst processing '" + describe() + "'", e);
         }
+    }
 
-        return builder.build();
+    @Override
+    public Grid readGrid() {
+        try (BufferedInputStream in = openStream()) {
+            return Grid.parse(in);
+        } catch (final IOException e) {
+            throw new IllegalArgumentException("An error occurred whilst processing '" + describe() + "'", e);
+        }
+    }
+
+    @Override
+    public Grid readGrid(final IntUnaryOperator valueResolver) {
+        try (BufferedReader in = openReader()) {
+            return Grid.parse(in.lines(), valueResolver);
+        } catch (final IOException e) {
+            throw new IllegalArgumentException("An error occurred whilst processing '" + describe() + "'", e);
+        }
+    }
+
+    @Override
+    public MutableGrid readMutableGrid() {
+        try (BufferedReader in = openReader()) {
+            return Grid.parseMutable(in.lines());
+        } catch (final IOException e) {
+            throw new IllegalArgumentException("An error occurred whilst processing '" + describe() + "'", e);
+        }
+    }
+
+    @Override
+    public MutableGrid readMutableGrid(final IntUnaryOperator valueResolver) {
+        try (BufferedReader in = openReader()) {
+            return Grid.parseMutable(in.lines(), valueResolver);
+        } catch (final IOException e) {
+            throw new IllegalArgumentException("An error occurred whilst processing '" + describe() + "'", e);
+        }
     }
 
     @Override
@@ -116,6 +161,14 @@ public abstract class StreamBasedContext implements SolutionContext {
      * @return the description
      */
     protected abstract String describe();
+
+    /**
+     * Return a new {@link BufferedInputStream} based on the {@link InputStream}.
+     *
+     * @return a new {@link BufferedInputStream}
+     * @throws IOException if the {@link BufferedInputStream} cannot be opened
+     */
+    protected abstract BufferedInputStream openStream() throws IOException;
 
     /**
      * Return a new {@link BufferedReader} based on the {@link InputStream}.
@@ -142,20 +195,11 @@ public abstract class StreamBasedContext implements SolutionContext {
      * Find the given data file on the classpath and process each line.
      */
     private <T> List<T> processDataFile(final Function<String, T> processor) {
-        return readAllLines()
-                .stream()
-                .map(processor)
-                .toList();
-    }
-
-    /*
-     * Find the given data file on the classpath and process each line.
-     */
-    private <T> Optional<T> processSingleLineDataFile(final Function<String, T> processor) {
-        return readAllLines()
-                .stream()
-                .map(processor)
-                .findFirst();
+        try (BufferedReader in = openReader()) {
+            return in.lines().map(processor).toList();
+        } catch (final IOException e) {
+            throw new IllegalArgumentException("An error occurred whilst processing '" + describe() + "'", e);
+        }
     }
 
     /*
@@ -164,6 +208,39 @@ public abstract class StreamBasedContext implements SolutionContext {
     private List<String> readAllLines() {
         try (BufferedReader in = openReader()) {
             return in.lines().toList();
+        } catch (final IOException e) {
+            throw new IllegalArgumentException("An error occurred whilst processing '" + describe() + "'", e);
+        }
+    }
+
+    /*
+     * Read all lines from the underlying `InputStream`.
+     */
+    private Stream<String> streamAllLines() {
+        try {
+            final BufferedReader in = openReader();
+            return in.lines()
+                    .onClose(() -> {
+                        try {
+                            in.close();
+                        } catch (final IOException e) {
+                            throw new IllegalStateException("Failed to close input stream!", e);
+                        }
+                    });
+        } catch (final IOException e) {
+            throw new IllegalArgumentException("An error occurred whilst processing '" + describe() + "'", e);
+        }
+    }
+
+    /*
+     * Read a single line from the underlying `InputStream`.
+     */
+    private String readSingleLine() {
+        try (BufferedReader in = openReader()) {
+            final String line = in.readLine();
+            if (line == null)
+                throw new IllegalStateException("Expected one line from the data file, but nothing was read!");
+            return line;
         } catch (final IOException e) {
             throw new IllegalArgumentException("An error occurred whilst processing '" + describe() + "'", e);
         }

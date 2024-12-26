@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/advent-of-code.iml" filepath="$PROJECT_DIR$/.idea/modules/advent-of-code.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/build/advent-of-code.build.iml" filepath="$PROJECT_DIR$/.idea/modules/build/advent-of-code.build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/advent-of-code.libs.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/advent-of-code.libs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/codegen/advent-of-code.libs.codegen.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/codegen/advent-of-code.libs.codegen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/codegen/annotations/advent-of-code.libs.codegen.annotations.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/codegen/annotations/advent-of-code.libs.codegen.annotations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/codegen/annotations/advent-of-code.libs.codegen.annotations.main.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/codegen/annotations/advent-of-code.libs.codegen.annotations.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/codegen/processor/advent-of-code.libs.codegen.processor.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/codegen/processor/advent-of-code.libs.codegen.processor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/codegen/processor/advent-of-code.libs.codegen.processor.main.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/codegen/processor/advent-of-code.libs.codegen.processor.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/framework/advent-of-code.libs.framework.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/framework/advent-of-code.libs.framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/framework/core/advent-of-code.libs.framework.core.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/framework/core/advent-of-code.libs.framework.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/framework/core/advent-of-code.libs.framework.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/framework/core/advent-of-code.libs.framework.core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/framework/utils-algo/advent-of-code.libs.framework.utils-algo.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/framework/utils-algo/advent-of-code.libs.framework.utils-algo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/framework/utils-algo/advent-of-code.libs.framework.utils-algo.main.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/framework/utils-algo/advent-of-code.libs.framework.utils-algo.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/framework/utils-geometry/advent-of-code.libs.framework.utils-geometry.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/framework/utils-geometry/advent-of-code.libs.framework.utils-geometry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/framework/utils-geometry/advent-of-code.libs.framework.utils-geometry.main.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/framework/utils-geometry/advent-of-code.libs.framework.utils-geometry.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/framework/utils-geometry/advent-of-code.libs.framework.utils-geometry.test.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/framework/utils-geometry/advent-of-code.libs.framework.utils-geometry.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/framework/utils-maths/advent-of-code.libs.framework.utils-maths.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/framework/utils-maths/advent-of-code.libs.framework.utils-maths.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/framework/utils-maths/advent-of-code.libs.framework.utils-maths.main.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/framework/utils-maths/advent-of-code.libs.framework.utils-maths.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/framework/utils-maths/advent-of-code.libs.framework.utils-maths.test.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/framework/utils-maths/advent-of-code.libs.framework.utils-maths.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/framework/utils-ocr/advent-of-code.libs.framework.utils-ocr.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/framework/utils-ocr/advent-of-code.libs.framework.utils-ocr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/framework/utils-ocr/advent-of-code.libs.framework.utils-ocr.main.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/framework/utils-ocr/advent-of-code.libs.framework.utils-ocr.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/runner/advent-of-code.libs.runner.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/runner/advent-of-code.libs.runner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/runner/benchmarker/advent-of-code.libs.runner.benchmarker.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/runner/benchmarker/advent-of-code.libs.runner.benchmarker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/runner/benchmarker/advent-of-code.libs.runner.benchmarker.main.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/runner/benchmarker/advent-of-code.libs.runner.benchmarker.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/runner/cli/advent-of-code.libs.runner.cli.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/runner/cli/advent-of-code.libs.runner.cli.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/runner/cli/advent-of-code.libs.runner.cli.main.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/runner/cli/advent-of-code.libs.runner.cli.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/runner/vertx/advent-of-code.libs.runner.vertx.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/runner/vertx/advent-of-code.libs.runner.vertx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/runner/vertx/advent-of-code.libs.runner.vertx.main.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/runner/vertx/advent-of-code.libs.runner.vertx.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/solutions/advent-of-code.solutions.iml" filepath="$PROJECT_DIR$/.idea/modules/solutions/advent-of-code.solutions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/solutions/aoc2020/advent-of-code.solutions.aoc2020.iml" filepath="$PROJECT_DIR$/.idea/modules/solutions/aoc2020/advent-of-code.solutions.aoc2020.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/solutions/aoc2020/advent-of-code.solutions.aoc2020.main.iml" filepath="$PROJECT_DIR$/.idea/modules/solutions/aoc2020/advent-of-code.solutions.aoc2020.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/solutions/aoc2020/advent-of-code.solutions.aoc2020.test.iml" filepath="$PROJECT_DIR$/.idea/modules/solutions/aoc2020/advent-of-code.solutions.aoc2020.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/solutions/aoc2021/advent-of-code.solutions.aoc2021.iml" filepath="$PROJECT_DIR$/.idea/modules/solutions/aoc2021/advent-of-code.solutions.aoc2021.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/solutions/aoc2021/advent-of-code.solutions.aoc2021.main.iml" filepath="$PROJECT_DIR$/.idea/modules/solutions/aoc2021/advent-of-code.solutions.aoc2021.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/solutions/aoc2021/advent-of-code.solutions.aoc2021.test.iml" filepath="$PROJECT_DIR$/.idea/modules/solutions/aoc2021/advent-of-code.solutions.aoc2021.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/solutions/aoc2022/advent-of-code.solutions.aoc2022.iml" filepath="$PROJECT_DIR$/.idea/modules/solutions/aoc2022/advent-of-code.solutions.aoc2022.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/solutions/aoc2022/advent-of-code.solutions.aoc2022.main.iml" filepath="$PROJECT_DIR$/.idea/modules/solutions/aoc2022/advent-of-code.solutions.aoc2022.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/solutions/aoc2022/advent-of-code.solutions.aoc2022.test.iml" filepath="$PROJECT_DIR$/.idea/modules/solutions/aoc2022/advent-of-code.solutions.aoc2022.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/solutions/aoc2023/advent-of-code.solutions.aoc2023.iml" filepath="$PROJECT_DIR$/.idea/modules/solutions/aoc2023/advent-of-code.solutions.aoc2023.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/solutions/aoc2023/advent-of-code.solutions.aoc2023.main.iml" filepath="$PROJECT_DIR$/.idea/modules/solutions/aoc2023/advent-of-code.solutions.aoc2023.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/solutions/aoc2023/advent-of-code.solutions.aoc2023.test.iml" filepath="$PROJECT_DIR$/.idea/modules/solutions/aoc2023/advent-of-code.solutions.aoc2023.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/solutions/aoc2024/advent-of-code.solutions.aoc2024.iml" filepath="$PROJECT_DIR$/.idea/modules/solutions/aoc2024/advent-of-code.solutions.aoc2024.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/solutions/aoc2024/advent-of-code.solutions.aoc2024.main.iml" filepath="$PROJECT_DIR$/.idea/modules/solutions/aoc2024/advent-of-code.solutions.aoc2024.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/solutions/aoc2024/advent-of-code.solutions.aoc2024.test.iml" filepath="$PROJECT_DIR$/.idea/modules/solutions/aoc2024/advent-of-code.solutions.aoc2024.test.iml" />
+    </modules>
+  </component>
+</project>

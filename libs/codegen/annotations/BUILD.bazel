@@ -1,0 +1,7 @@
+#
+# Codegen: Annotations
+#
+
+load("@//build:modules/modules.bzl", "aoc_library")
+
+aoc_library(name = "annotations")

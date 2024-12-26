@@ -1,0 +1,92 @@
+#
+# java.MODULE.bazel - Java definitions
+#
+
+bazel_dep(name = "bazel_skylib", version = "1.7.1")
+bazel_dep(name = "rules_java", version = "7.12.2")
+bazel_dep(name = "contrib_rules_jvm", version = "0.27.0")
+bazel_dep(name = "rules_jvm_external", version = "6.6")
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+
+VERSIONS = {
+    # Build
+    "com.puppycrawl.tools": "10.17.0",
+    "com.github.spotbugs": "4.8.5",
+
+    # Miscellaneous
+    "org.slf4j": "2.0.12",
+    "com.fasterxml.jackson.core": "2.17.0",
+    "net.sourceforge.argparse4j": "0.9.0",
+
+    # Vert.x
+    "io.vertx": "4.5.10",
+
+    # JUnit, etc
+    "net.bytebuddy": "1.15.3",
+    "org.assertj": "3.24.2",
+    "org.hamcrest": "2.2",
+    "org.junit.jupiter": "5.11.1",
+    "org.junit.platform": "1.11.1",
+}
+
+ARTIFACTS = [
+    # Build
+    ("com.puppycrawl.tools", "checkstyle"),
+    ("com.github.spotbugs", "spotbugs"),
+
+    # Miscellaneous
+    ("org.slf4j", "slf4j-api"),
+    ("org.slf4j", "slf4j-simple"),
+    ("net.sourceforge.argparse4j", "argparse4j"),
+    ("com.fasterxml.jackson.core", "jackson-annotations"),
+    ("com.fasterxml.jackson.core", "jackson-core"),
+    ("com.fasterxml.jackson.core", "jackson-databind"),
+
+    # Vert.x
+    ("io.vertx", "vertx-core"),
+    ("io.vertx", "vertx-web"),
+    ("io.vertx", "vertx-web-common"),
+    ("io.vertx", "vertx-web-templ-thymeleaf"),
+
+    # JUnit, etc
+    ("org.assertj", "assertj-core", True),
+    ("org.hamcrest", "hamcrest", True),
+    ("org.hamcrest", "hamcrest-core", True),
+    ("org.junit.jupiter", "junit-jupiter-api", True),
+    ("org.junit.jupiter", "junit-jupiter-params", True),
+    ("org.junit.jupiter", "junit-jupiter-engine", True),
+    ("org.junit.platform", "junit-platform-commons", True),
+    ("org.junit.platform", "junit-platform-engine", True),
+    ("org.junit.platform", "junit-platform-launcher", True),
+    ("org.junit.platform", "junit-platform-runner", True),
+    ("org.junit.platform", "junit-platform-reporting", True),
+]
+
+[
+    maven.artifact(
+        testonly = g[2] if len(g) > 2 else False,
+        artifact = g[1],
+        group = g[0],
+        version = VERSIONS[g[0]],
+    )
+    for g in ARTIFACTS
+]
+
+maven.install(
+    name = "maven",
+    artifacts = [
+        "%s:%s:%s" % (
+            g[0],
+            g[1],
+            VERSIONS[g[0]],
+        )
+        for g in ARTIFACTS
+    ],
+    fetch_sources = True,
+    lock_file = "//build:maven.json",
+    repositories = ["https://repo1.maven.org/maven2"],
+    strict_visibility = True,
+    version_conflict_policy = "default",
+)
+use_repo(maven, "maven", "unpinned_maven")

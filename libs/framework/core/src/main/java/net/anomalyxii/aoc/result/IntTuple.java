@@ -54,6 +54,22 @@ public record IntTuple(int answer1, int answer2) implements Tuple<Integer, Integ
         return new IntTuple(answer1 + other.answer1, answer2 + other.answer2);
     }
 
+    /**
+     * Increment the result of each answer based on whether a given condition
+     * was {@literal true}.
+     *
+     * @param part1 whether to increment the part 1 answer
+     * @param part2 whether to increment the part 2 answer
+     * @return the new {@link IntTuple}
+     */
+    public IntTuple incrementIf(final boolean part1, final boolean part2) {
+        if (!part1 && !part2) return this;
+        return new IntTuple(
+                part1 ? answer1 + 1 : answer1,
+                part2 ? answer2 + 1 : answer2
+        );
+    }
+
     // ****************************************
     // To String
     // ****************************************
@@ -62,5 +78,4 @@ public record IntTuple(int answer1, int answer2) implements Tuple<Integer, Integ
     public String toString() {
         return "%d & %d" .formatted(answer1, answer2);
     }
-
 }

@@ -12,8 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class Day19Test {
 
-    private static final SolutionContext EXAMPLE = SolutionContext.example(2020, 19);
-    private static final SolutionContext EXAMPLE_2 = SolutionContext.example(2020, 19, 2);
+    private static final SolutionContext EXAMPLE = SolutionContext.example(19);
+    private static final SolutionContext EXAMPLE_2 = SolutionContext.example(19, 2);
     private static final SolutionContext LIVE = SolutionContext.live(2020, 19);
 
     // ****************************************

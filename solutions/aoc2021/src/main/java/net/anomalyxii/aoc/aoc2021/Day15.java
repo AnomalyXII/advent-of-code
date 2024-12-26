@@ -1,10 +1,10 @@
 package net.anomalyxii.aoc.aoc2021;
 
-import net.anomalyxii.aoc.utils.algorithms.Dijkstra;
-import net.anomalyxii.aoc.utils.algorithms.ShortestPath;
 import net.anomalyxii.aoc.annotations.Part;
 import net.anomalyxii.aoc.annotations.Solution;
 import net.anomalyxii.aoc.context.SolutionContext;
+import net.anomalyxii.aoc.utils.algorithms.Dijkstra;
+import net.anomalyxii.aoc.utils.algorithms.ShortestPath;
 import net.anomalyxii.aoc.utils.geometry.Coordinate;
 import net.anomalyxii.aoc.utils.geometry.Grid;
 
@@ -31,7 +31,7 @@ public class Day15 {
      */
     @Part(part = I)
     public long calculateAnswerForPart1(final SolutionContext context) {
-        final Grid chiterns = Grid.parse(context.stream(), chr -> chr - '0');
+        final Grid chiterns = context.readGrid(chr -> chr - '0');
         return findShortestPath(chiterns);
     }
 
@@ -43,7 +43,7 @@ public class Day15 {
      */
     @Part(part = II)
     public long calculateAnswerForPart2(final SolutionContext context) {
-        final Grid chitons = Grid.parse(context.stream(), chr -> chr - '0');
+        final Grid chitons = context.readGrid(chr -> chr - '0');
         final Grid extraChitons = Grid.size(
                 chitons.width() * 5,
                 chitons.height() * 5,

@@ -9,7 +9,7 @@ package net.anomalyxii.aoc.result;
 public record LongTuple(long answer1, long answer2) implements Tuple<Long, Long> {
 
     /**
-     * An {@link LongTuple} with no value for either answer.
+     * A {@link LongTuple} with no value for either answer.
      */
     public static final LongTuple NULL = new LongTuple(0, 0);
 
@@ -45,7 +45,7 @@ public record LongTuple(long answer1, long answer2) implements Tuple<Long, Long>
     /**
      * Accumulate new data for each answer.
      *
-     * @param other an {@link LongTuple} containing the amounts to add
+     * @param other a {@link LongTuple} containing the amounts to add
      * @return the new {@link LongTuple}
      */
     public LongTuple add(final LongTuple other) {

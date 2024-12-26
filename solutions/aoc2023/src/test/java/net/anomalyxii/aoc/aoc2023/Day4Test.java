@@ -1,4 +1,4 @@
-    package net.anomalyxii.aoc.aoc2023;
+package net.anomalyxii.aoc.aoc2023;
 
 import net.anomalyxii.aoc.context.SolutionContext;
 import net.anomalyxii.aoc.result.IntTuple;
@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class Day4Test {
 
-    private static final SolutionContext EXAMPLE = SolutionContext.example(2023, 4);
+    private static final SolutionContext EXAMPLE = SolutionContext.example(4);
     private static final SolutionContext LIVE = SolutionContext.live(2023, 4);
 
     // ****************************************

@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class Day3Test {
 
-    private static final SolutionContext EXAMPLE = SolutionContext.example(2020, 3);
+    private static final SolutionContext EXAMPLE = SolutionContext.example(3);
     private static final SolutionContext LIVE = SolutionContext.live(2020, 3);
 
     // ****************************************

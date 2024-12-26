@@ -262,10 +262,61 @@
                             part2_el.appendChild(part2_description_el);
                             container_el.appendChild(part2_el);
 
+                            const separator_el = document.createElement('hr')
+                            container_el.appendChild(separator_el);
+                            const prev_el = _create_prev_link(details.year, details.day);
+                            const next_el = _create_next_link(details.year, details.day);
+
+                            const navigation_el = document.createElement('p');
+                            navigation_el.appendChild(prev_el);
+                            navigation_el.appendChild(document.createTextNode(" :: "));
+                            navigation_el.appendChild(next_el);
+                            container_el.appendChild(navigation_el);
+
                             return container_el;
                         });
             });
         };
+
+        /*
+         * Create a link to the previous puzzle, if it exists.
+         */
+        const _create_prev_link = function(year, day) {
+            const prev_year = day === 1 ? year - 1 : year;
+            const prev_day = day === 1 ? 25 : day - 1;
+
+            const prev_el = document.createElement('a');
+            prev_el.innerText = 'Previous';
+            if (CHALLENGES[prev_year] !== undefined && CHALLENGES[prev_year][prev_day - 1] !== undefined) {
+                prev_el.onclick = function () {
+                    show_challenge_details(prev_year, prev_day);
+                };
+                prev_el.setAttribute('href', '#');
+            } else {
+                prev_el.style.setProperty('text-decoration', 'strikethrough');
+            }
+            return prev_el;
+        }
+
+        /*
+         * Create a link to the next puzzle, if it exists.
+         */
+        const _create_next_link = function(year, day) {
+            const next_year = day === 25 ? year + 1 : year;
+            const next_day = day === 25 ? 1 : day + 1;
+
+            const next_el = document.createElement('a');
+            next_el.innerText = 'Next';
+            if (CHALLENGES[next_year] !== undefined && CHALLENGES[next_year][next_day - 1] !== undefined) {
+                next_el.onclick = function () {
+                    show_challenge_details(next_year, next_day);
+                };
+                next_el.setAttribute('href', '#');
+            } else {
+                next_el.style.setProperty('text-decoration', 'strikethrough');
+            }
+            return next_el;
+        }
 
         // And they're off!
         window.onload = async function () {

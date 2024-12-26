@@ -8,12 +8,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class Day10Test {
 
-    private static final SolutionContext EXAMPLE_1 = SolutionContext.example(2023, 10);
-    private static final SolutionContext EXAMPLE_2 = SolutionContext.example(2023, 10, 2);
-    private static final SolutionContext EXAMPLE_3 = SolutionContext.example(2023, 10, 3);
-    private static final SolutionContext EXAMPLE_4 = SolutionContext.example(2023, 10, 4);
-    private static final SolutionContext EXAMPLE_5 = SolutionContext.example(2023, 10, 5);
-    private static final SolutionContext EXAMPLE_6 = SolutionContext.example(2023, 10, 6);
+    private static final SolutionContext EXAMPLE_1 = SolutionContext.example(10);
+    private static final SolutionContext EXAMPLE_2 = SolutionContext.example(10, 2);
+    private static final SolutionContext EXAMPLE_3 = SolutionContext.example(10, 3);
+    private static final SolutionContext EXAMPLE_4 = SolutionContext.example(10, 4);
+    private static final SolutionContext EXAMPLE_5 = SolutionContext.example(10, 5);
+    private static final SolutionContext EXAMPLE_6 = SolutionContext.example(10, 6);
     private static final SolutionContext LIVE = SolutionContext.live(2023, 10);
 
     // ****************************************

@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.fail;
 
 class Day5Test {
 
-    private static final SolutionContext EXAMPLE = SolutionContext.example(2020, 5);
+    private static final SolutionContext EXAMPLE = SolutionContext.example(5);
     private static final SolutionContext LIVE = SolutionContext.live(2020, 5);
 
     // ****************************************
