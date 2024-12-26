@@ -1,10 +1,10 @@
 package net.anomalyxii.aoc.aoc2022;
 
-import net.anomalyxii.aoc.utils.algorithms.Dijkstra;
-import net.anomalyxii.aoc.utils.algorithms.ShortestPath;
 import net.anomalyxii.aoc.annotations.Part;
 import net.anomalyxii.aoc.annotations.Solution;
 import net.anomalyxii.aoc.context.SolutionContext;
+import net.anomalyxii.aoc.utils.algorithms.Dijkstra;
+import net.anomalyxii.aoc.utils.algorithms.ShortestPath;
 import net.anomalyxii.aoc.utils.geometry.Coordinate;
 import net.anomalyxii.aoc.utils.geometry.Grid;
 
@@ -32,7 +32,7 @@ public class Day12 {
      */
     @Part(part = I)
     public long calculateAnswerForPart1(final SolutionContext context) {
-        final Grid grid = Grid.parse(context.stream());
+        final Grid grid = context.readGrid();
         final Coordinate start = findStart(grid);
         final Coordinate end = findEnd(grid);
 
@@ -48,7 +48,7 @@ public class Day12 {
      */
     @Part(part = II)
     public long calculateAnswerForPart2(final SolutionContext context) {
-        final Grid grid = Grid.parse(context.stream());
+        final Grid grid = context.readGrid();
 
         long shortestPath = Long.MAX_VALUE;
         for (final Coordinate start : findPossibleStarts(grid)) {

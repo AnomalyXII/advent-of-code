@@ -4,7 +4,6 @@ import net.anomalyxii.aoc.annotations.Part;
 import net.anomalyxii.aoc.annotations.Solution;
 import net.anomalyxii.aoc.context.SolutionContext;
 import net.anomalyxii.aoc.utils.geometry.Coordinate;
-import net.anomalyxii.aoc.utils.geometry.Grid;
 import net.anomalyxii.aoc.utils.geometry.Grid.MutableGrid;
 
 import java.util.concurrent.atomic.AtomicLong;
@@ -30,7 +29,7 @@ public class Day11 {
      */
     @Part(part = I)
     public long calculateAnswerForPart1(final SolutionContext context) {
-        final MutableGrid octopi = Grid.parseMutable(context.stream(), chr -> chr - '0');
+        final MutableGrid octopi = context.readMutableGrid(chr -> chr - '0');
 
         final AtomicLong flashes = new AtomicLong(0L);
         for (int i = 0; i < 100; i++) {
@@ -47,7 +46,7 @@ public class Day11 {
      */
     @Part(part = II)
     public long calculateAnswerForPart2(final SolutionContext context) {
-        final MutableGrid octopi = Grid.parseMutable(context.stream(), chr -> chr - '0');
+        final MutableGrid octopi = context.readMutableGrid(chr -> chr - '0');
 
         long turn = 0;
         boolean inSync;

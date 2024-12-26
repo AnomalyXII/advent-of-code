@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+BASEDIR=$(readlink -f "$(dirname "$0")")
+COMMAND=${1?'Usage: ./dev [build|repin|new-day|run|help]'}
+shift
+
+# Helper functions
+
+function _bazel()
+{
+    if command -v bazel >/dev/null 2>/dev/null
+    then
+        bazel $@
+    else
+        bazelisk $@
+    fi
+}
+
+function bazelisk()
+{
+    local BAZEL_OPT="${BASEDIR}/opt/bazel/"
+    local BAZELISK_BINARY="${BAZEL_OPT}/bazelisk"
+
+    if [ ! -f "${BAZELISK_BINARY}" ]
+    then
+        mkdir -p "${BAZEL_OPT}"
+        wget https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-amd64 -O "${BAZELISK_BINARY}"
+        chmod +x "${BAZELISK_BINARY}"
+    fi
+
+    $BAZELISK_BINARY $@
+}
+
+# Main command selection
+
+case "$COMMAND" in
+    build)
+        if [ "$#" -eq 0 ]
+        then
+            _bazel test --test_tag_filters=build //... &&
+                _bazel test --test_tag_filters=-build //...
+        else
+            _bazel build $@
+        fi
+    ;;
+
+    clean)
+        _bazel clean $@
+    ;;
+
+    repin)
+        _bazel run @unpinned_maven//:pin
+    ;;
+
+    new-day|nd)
+        ./build/new-day.sh
+    ;;
+
+    generate-answers|ga)
+        _bazel run //libs/runner/benchmarker:answer-gen -- "$BASEDIR" $@
+    ;;
+
+    run)
+        runner=${1:-}
+        [ -z "$runner" ] || shift 1
+
+        case "${runner:-cli}" in
+            cli) _bazel run //libs/runner/cli -- $@ ;;
+            vertx) _bazel run //libs/runner/vertx -- $@ ;;
+            bench) _bazel run //libs/runner/benchmarker -- \
+                "${1?'Missing year'}" "${2?'Missing day'}" \
+                "${3:-$PWD/solutions/aoc$1/src/main/resources/$1/day$2.txt}"
+            ;;
+            bench-native) _bazel run //:benchmark-tool --  \
+                "${1?'Missing year'}" "${2?'Missing day'}" \
+                "${3:-$PWD/solutions/aoc$1/src/main/resources/$1/day$2.txt}"
+            ;;
+            *) echo 'Invalid runner' $runner >&2; exit 1 ;;
+        esac
+    ;;
+
+    help)
+        echo 'Usage: ./dev [build|repin|new-day|run|help]'
+        echo
+        echo '    build: build and test the application'
+        echo '    repin: re-pin the Maven dependencies'
+        echo '  new-day: generate skeleton files for a new day'
+        echo '      run: run the challenges'
+        echo '     help: display this text'
+    ;;
+esac

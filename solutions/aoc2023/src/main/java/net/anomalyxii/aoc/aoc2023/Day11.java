@@ -189,7 +189,7 @@ public class Day11 {
      * Parse the `Coordinate`s of each galaxy.
      */
     private static Set<Coordinate> parseGalaxies(final SolutionContext context) {
-        final Grid galaxyMap = Grid.parse(context.stream());
+        final Grid galaxyMap = context.readGrid();
         final Set<Coordinate> galaxies = new HashSet<>();
         galaxyMap.forEach(coordinate -> {
             final int reading = galaxyMap.get(coordinate);

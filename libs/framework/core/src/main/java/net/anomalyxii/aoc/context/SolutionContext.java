@@ -1,11 +1,14 @@
 package net.anomalyxii.aoc.context;
 
 import net.anomalyxii.aoc.Challenge;
+import net.anomalyxii.aoc.utils.geometry.Grid;
+import net.anomalyxii.aoc.utils.geometry.Grid.MutableGrid;
 import net.anomalyxii.aoc.utils.ocr.OCR;
 
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.IntUnaryOperator;
 import java.util.stream.Stream;
 
 /**
@@ -85,6 +88,36 @@ public interface SolutionContext {
     Stream<List<String>> streamBatches();
 
     /**
+     * Parse all lines in the challenge data file into a {@link Grid}.
+     *
+     * @return the {@link Grid}
+     */
+    Grid readGrid();
+
+    /**
+     * Parse all lines in the challenge data file into a {@link Grid}.
+     *
+     * @param valueResolver the {@link IntUnaryOperator function} that resolves the value for each {@link Character}
+     * @return the {@link Grid}
+     */
+    Grid readGrid(IntUnaryOperator valueResolver);
+
+    /**
+     * Parse all lines in the challenge data file into a {@link MutableGrid}.
+     *
+     * @return the {@link MutableGrid}
+     */
+    MutableGrid readMutableGrid();
+
+    /**
+     * Parse all lines in the challenge data file into a {@link MutableGrid}.
+     *
+     * @param valueResolver the {@link IntUnaryOperator function} that resolves the value for each {@link Character}
+     * @return the {@link MutableGrid}
+     */
+    MutableGrid readMutableGrid(IntUnaryOperator valueResolver);
+
+    /**
      * Get an {@link OCR} relevant to this {@link SolutionContext}.
      *
      * @return the {@link OCR}
@@ -107,24 +140,22 @@ public interface SolutionContext {
     /**
      * Create a {@link SolutionContext} for the default example for a given day.
      *
-     * @param year the year
-     * @param day  the day
+     * @param day the day
      * @return the {@link SolutionContext}
      */
-    static SolutionContext example(final int year, final int day) {
-        return builder().example(year, day).build();
+    static SolutionContext example(final int day) {
+        return builder().example(day).build();
     }
 
     /**
      * Create a {@link SolutionContext} for an alternative example for a given day.
      *
-     * @param year    the year
      * @param day     the day
      * @param variant the example variant
      * @return the {@link SolutionContext}
      */
-    static SolutionContext example(final int year, final int day, final int variant) {
-        return builder().example(year, day, variant).build();
+    static SolutionContext example(final int day, final int variant) {
+        return builder().example(day, variant).build();
     }
 
     /**

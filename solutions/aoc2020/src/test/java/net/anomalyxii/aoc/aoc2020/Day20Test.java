@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class Day20Test {
 
-    private static final SolutionContext EXAMPLE = SolutionContext.example(2020, 20);
+    private static final SolutionContext EXAMPLE = SolutionContext.example(20);
     private static final SolutionContext LIVE = SolutionContext.live(2020, 20);
 
     // ****************************************
@@ -77,21 +77,25 @@ class Day20Test {
     @Test
     void findMatchingBorders_LeftMatchesRight() {
         // arrange
-        final Day20.Tile left = Day20.Tile.createTile("Tile 1", new char[][]{
-                ".##.#".toCharArray(),
-                "#...#".toCharArray(),
-                "#...#".toCharArray(),
-                "#....".toCharArray(),
-                ".#..#".toCharArray(),
-        });
+        final Day20.Tile left = Day20.Tile.createTile(
+                "Tile 1", new char[][]{
+                        ".##.#".toCharArray(),
+                        "#...#".toCharArray(),
+                        "#...#".toCharArray(),
+                        "#....".toCharArray(),
+                        ".#..#".toCharArray(),
+                }
+        );
 
-        final Day20.Tile right = Day20.Tile.createTile("Tile 2", new char[][]{
-                "#.#..".toCharArray(),
-                "#....".toCharArray(),
-                "#...#".toCharArray(),
-                ".....".toCharArray(),
-                "##...".toCharArray(),
-        });
+        final Day20.Tile right = Day20.Tile.createTile(
+                "Tile 2", new char[][]{
+                        "#.#..".toCharArray(),
+                        "#....".toCharArray(),
+                        "#...#".toCharArray(),
+                        ".....".toCharArray(),
+                        "##...".toCharArray(),
+                }
+        );
 
         // act
         final Set<Day20.Edge> leftBorders = Day20.findMatchingBorders(left, right);
@@ -109,21 +113,25 @@ class Day20Test {
     @Test
     void findMatchingBorders_TopMatchesBottom() {
         // arrange
-        final Day20.Tile top = Day20.Tile.createTile("Tile 1", new char[][]{
-                "#.#.#".toCharArray(),
-                ".....".toCharArray(),
-                "#....".toCharArray(),
-                ".....".toCharArray(),
-                "##.#.".toCharArray(),
-        });
+        final Day20.Tile top = Day20.Tile.createTile(
+                "Tile 1", new char[][]{
+                        "#.#.#".toCharArray(),
+                        ".....".toCharArray(),
+                        "#....".toCharArray(),
+                        ".....".toCharArray(),
+                        "##.#.".toCharArray(),
+                }
+        );
 
-        final Day20.Tile bottom = Day20.Tile.createTile("Tile 2", new char[][]{
-                "##.#.".toCharArray(),
-                "....#".toCharArray(),
-                "....#".toCharArray(),
-                "#....".toCharArray(),
-                ".#.#.".toCharArray(),
-        });
+        final Day20.Tile bottom = Day20.Tile.createTile(
+                "Tile 2", new char[][]{
+                        "##.#.".toCharArray(),
+                        "....#".toCharArray(),
+                        "....#".toCharArray(),
+                        "#....".toCharArray(),
+                        ".#.#.".toCharArray(),
+                }
+        );
 
         // act
         final Set<Day20.Edge> topBorders = Day20.findMatchingBorders(top, bottom);
@@ -141,21 +149,25 @@ class Day20Test {
     @Test
     void findMatchingBorders_LeftMatchesRight_Flipped() {
         // arrange
-        final Day20.Tile left = Day20.Tile.createTile("Tile 1", new char[][]{
-                ".##.#".toCharArray(),
-                "#...#".toCharArray(),
-                "#...#".toCharArray(),
-                "#....".toCharArray(),
-                ".#..#".toCharArray(),
-        });
+        final Day20.Tile left = Day20.Tile.createTile(
+                "Tile 1", new char[][]{
+                        ".##.#".toCharArray(),
+                        "#...#".toCharArray(),
+                        "#...#".toCharArray(),
+                        "#....".toCharArray(),
+                        ".#..#".toCharArray(),
+                }
+        );
 
-        final Day20.Tile right = Day20.Tile.createTile("Tile 2", new char[][]{
-                "..#.#".toCharArray(),
-                "....#".toCharArray(),
-                "#...#".toCharArray(),
-                ".....".toCharArray(),
-                "...##".toCharArray(),
-        });
+        final Day20.Tile right = Day20.Tile.createTile(
+                "Tile 2", new char[][]{
+                        "..#.#".toCharArray(),
+                        "....#".toCharArray(),
+                        "#...#".toCharArray(),
+                        ".....".toCharArray(),
+                        "...##".toCharArray(),
+                }
+        );
 
         // act
         final Set<Day20.Edge> leftBorders = Day20.findMatchingBorders(left, right);
@@ -173,21 +185,25 @@ class Day20Test {
     @Test
     void findMatchingBorders_LeftMatchesRight_Rotated180() {
         // arrange
-        final Day20.Tile left = Day20.Tile.createTile("Tile 1", new char[][]{
-                ".##.#".toCharArray(),
-                "#...#".toCharArray(),
-                "#...#".toCharArray(),
-                "#....".toCharArray(),
-                ".#..#".toCharArray(),
-        });
+        final Day20.Tile left = Day20.Tile.createTile(
+                "Tile 1", new char[][]{
+                        ".##.#".toCharArray(),
+                        "#...#".toCharArray(),
+                        "#...#".toCharArray(),
+                        "#....".toCharArray(),
+                        ".#..#".toCharArray(),
+                }
+        );
 
-        final Day20.Tile right = Day20.Tile.createTile("Tile 2", new char[][]{
-                "...##".toCharArray(),
-                ".....".toCharArray(),
-                "#...#".toCharArray(),
-                "....#".toCharArray(),
-                "..#.#".toCharArray(),
-        });
+        final Day20.Tile right = Day20.Tile.createTile(
+                "Tile 2", new char[][]{
+                        "...##".toCharArray(),
+                        ".....".toCharArray(),
+                        "#...#".toCharArray(),
+                        "....#".toCharArray(),
+                        "..#.#".toCharArray(),
+                }
+        );
 
         // act
         final Set<Day20.Edge> leftBorders = Day20.findMatchingBorders(left, right);

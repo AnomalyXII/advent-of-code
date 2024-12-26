@@ -14,8 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class Day9Test {
 
-    private static final SolutionContext EXAMPLE = SolutionContext.example(2022, 9);
-    private static final SolutionContext EXAMPLE_2 = SolutionContext.example(2022, 9, 2);
+    private static final SolutionContext EXAMPLE = SolutionContext.example(9);
+    private static final SolutionContext EXAMPLE_2 = SolutionContext.example(9, 2);
     private static final SolutionContext LIVE = SolutionContext.live(2022, 9);
     private static final Coordinate C0_0 = new Coordinate(0, 0);
     private static final Coordinate C0_1 = new Coordinate(0, 1);

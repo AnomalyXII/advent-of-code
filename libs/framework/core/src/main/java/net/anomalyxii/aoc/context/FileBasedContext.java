@@ -2,6 +2,7 @@ package net.anomalyxii.aoc.context;
 
 import net.anomalyxii.aoc.utils.ocr.LetterSet;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -34,13 +35,18 @@ public class FileBasedContext extends StreamBasedContext {
     // ****************************************
 
     @Override
-    protected BufferedReader openReader() throws IOException {
-        return Files.newBufferedReader(datafile, StandardCharsets.UTF_8);
+    protected String describe() {
+        return datafile.toAbsolutePath().toString();
     }
 
     @Override
-    protected String describe() {
-        return datafile.toAbsolutePath().toString();
+    protected BufferedInputStream openStream() throws IOException {
+        return new BufferedInputStream(Files.newInputStream(datafile));
+    }
+
+    @Override
+    protected BufferedReader openReader() throws IOException {
+        return Files.newBufferedReader(datafile, StandardCharsets.UTF_8);
     }
 
 }

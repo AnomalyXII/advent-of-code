@@ -24,24 +24,22 @@ public class SolutionContextBuilder {
     /**
      * Create a {@link SolutionContext} for the default example for a given day.
      *
-     * @param year    the year
      * @param day the day
      * @return a {@link SolutionContextBuilder} for chaining
      */
-    public SolutionContextBuilder example(final int year, final int day) {
-        return loading(year + "/day" + day + "-test.txt", Type.CLASSPATH);
+    public SolutionContextBuilder example(final int day) {
+        return loading("day" + day + "-test.txt", Type.CLASSPATH);
     }
 
     /**
      * Create a {@link SolutionContext} for an alternative example for a given day.
      *
-     * @param year    the year
      * @param day     the day
      * @param variant the example variant
      * @return a {@link SolutionContextBuilder} for chaining
      */
-    public SolutionContextBuilder example(final int year, final int day, final int variant) {
-        return loading(year + "/day" + day + "_" + variant + "-test.txt", Type.CLASSPATH);
+    public SolutionContextBuilder example(final int day, final int variant) {
+        return loading("day" + day + "_" + variant + "-test.txt", Type.CLASSPATH);
     }
 
     /**

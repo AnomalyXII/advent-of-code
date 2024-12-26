@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class Day12Test {
 
-    private static final SolutionContext EXAMPLE = SolutionContext.example(2021, 12);
+    private static final SolutionContext EXAMPLE = SolutionContext.example(12);
     private static final SolutionContext LIVE = SolutionContext.live(2021, 12);
 
     // ****************************************

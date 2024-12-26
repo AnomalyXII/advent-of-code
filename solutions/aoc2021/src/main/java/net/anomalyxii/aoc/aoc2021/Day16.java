@@ -45,8 +45,7 @@ public class Day16 {
      */
     @Part(part = II)
     public long calculateAnswerForPart2(final SolutionContext context) {
-        return context.processLine(line -> Packet.parse(line, version -> {
-        }).value);
+        return context.processLine(line -> Packet.parse(line, version -> {}).value);
     }
 
     // ****************************************

@@ -27,7 +27,7 @@ public class Arguments {
 
         parser.addArgument("-y", "--year")
                 .type(Integer.class)
-                .choices(2020, 2021, 2022, 2023)
+                .choices(2020, 2021, 2022, 2023, 2024)
                 .help("Specify a year to run");
         parser.addArgument("-d", "--day")
                 .type(Integer.class)

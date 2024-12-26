@@ -145,17 +145,19 @@ public class Day2 {
             final String passwordAndPolicy,
             final PolicyInterpretation interpretation
     ) {
-        return splitPolicyAndValidatePassword(passwordAndPolicy, (policy, password) -> {
-            final String[] policyParts = policy.split(" ", 2);
-            final String policyRange = policyParts[0];
-            final String[] policyRangeParts = policyRange.split("-", 2);
+        return splitPolicyAndValidatePassword(
+                passwordAndPolicy, (policy, password) -> {
+                    final String[] policyParts = policy.split(" ", 2);
+                    final String policyRange = policyParts[0];
+                    final String[] policyRangeParts = policyRange.split("-", 2);
 
-            final char policyChar = policyParts[1].charAt(0);
-            final int policyFirstPosition = Integer.parseInt(policyRangeParts[0]);
-            final int policySecondPosition = Integer.parseInt(policyRangeParts[1]);
+                    final char policyChar = policyParts[1].charAt(0);
+                    final int policyFirstPosition = Integer.parseInt(policyRangeParts[0]);
+                    final int policySecondPosition = Integer.parseInt(policyRangeParts[1]);
 
-            return interpretation.validate(policyChar, policyFirstPosition, policySecondPosition, password);
-        });
+                    return interpretation.validate(policyChar, policyFirstPosition, policySecondPosition, password);
+                }
+        );
     }
 
     /*

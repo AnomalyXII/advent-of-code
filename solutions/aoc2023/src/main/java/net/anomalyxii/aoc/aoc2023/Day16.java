@@ -32,7 +32,7 @@ public class Day16 {
      */
     @Part(part = I)
     public int calculateAnswerForPart1(final SolutionContext context) {
-        final Grid grid = Grid.parse(context.stream());
+        final Grid grid = context.readGrid();
         return countEnergisedCells(grid, new Beam(Coordinate.ORIGIN, Direction.RIGHT));
     }
 
@@ -44,7 +44,7 @@ public class Day16 {
      */
     @Part(part = II)
     public int calculateAnswerForPart2(final SolutionContext context) {
-        final Grid grid = Grid.parse(context.stream());
+        final Grid grid = context.readGrid();
 
         return testEdges(grid);
     }
@@ -61,7 +61,7 @@ public class Day16 {
      */
     @Optimised
     public IntTuple calculateAnswers(final SolutionContext context) {
-        final Grid grid = Grid.parse(context.stream());
+        final Grid grid = context.readGrid();
 
         return new IntTuple(
                 countEnergisedCells(grid, new Beam(Coordinate.ORIGIN, Direction.RIGHT)),

@@ -59,7 +59,7 @@ public class Day21 {
      */
     @Part(part = I)
     public long calculateAnswerForPart1(final SolutionContext context) {
-        final Grid map = Grid.parse(context.stream());
+        final Grid map = context.readGrid();
 
         final Coordinate start = map.stream()
                 .filter(c -> map.get(c) == 'S')

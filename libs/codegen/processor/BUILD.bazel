@@ -1,0 +1,14 @@
+#
+# Codegen: Annotation Processors
+#
+
+load("@//build:modules/modules.bzl", "aoc_plugin")
+
+aoc_plugin(
+    name = "processor",
+    processor_class = "net.anomalyxii.aoc.annotations.SolutionGenerator",
+    generates_api = True,
+    deps = [
+        "//libs/codegen/annotations"
+    ],
+)

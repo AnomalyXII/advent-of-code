@@ -1,0 +1,25 @@
+#
+# Github Workflow to build & test.
+#
+name: Build & Test
+on: [ push ]
+
+jobs:
+  build:
+    name: 'Bazel Build'
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: 'actions/checkout@v4'
+      - name: 'Run Bazel tests'
+        uses: 'actions/cache@v4'
+        with:
+          path: |
+            ~/.cache/bazel
+          key: ${{ runner.os }}-bazel-${{ hashFiles('.bazelversion', '.bazelrc', 'WORKSPACE', 'WORKSPACE.bazel', 'MODULE.bazel') }}
+          restore-keys: |
+            ${{ runner.os }}-bazel-
+      - name: 'Unlock git-crypt secrets'
+        uses: 'sliteteam/github-action-git-crypt-unlock@1.2.0'
+        env:
+          GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
+      - run: bazelisk test //...

@@ -36,11 +36,10 @@ public class AdventOfCode {
             return;
         }
 
-        SOLUTION_LOADER.allChallenges().stream()
+        SOLUTION_LOADER.allChallenges(namespace.getInt("year"), namespace.getInt("day")).stream()
                 .sorted()
                 .parallel()
-                .filter(day -> day.matches(namespace.getInt("year"), namespace.getInt("day")))
-                .flatMap(day -> solve(day))
+                .flatMap(AdventOfCode::solve)
                 .forEachOrdered(Solution::print);
     }
 

@@ -29,7 +29,7 @@ public class Day8 {
      */
     @Part(part = I)
     public long calculateAnswerForPart1(final SolutionContext context) {
-        final Grid forest = Grid.parse(context.stream(), c -> c - '0');
+        final Grid forest = context.readGrid(c -> c - '0');
 
         return forest.entries()
                 .filter(entry -> {
@@ -51,7 +51,7 @@ public class Day8 {
      */
     @Part(part = II)
     public long calculateAnswerForPart2(final SolutionContext context) {
-        final Grid forest = Grid.parse(context.stream(), c -> c - '0');
+        final Grid forest = context.readGrid(c -> c - '0');
         return forest.entries()
                 .mapToLong(entry -> {
                     final Coordinate coordinate = entry.getKey();

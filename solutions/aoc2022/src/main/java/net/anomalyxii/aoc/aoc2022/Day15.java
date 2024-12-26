@@ -187,7 +187,7 @@ public class Day15 {
          * beacon.
          */
         int calculateManhattanDistance() {
-            return calculateManhattanDistance(location, beacon);
+            return location.calculateManhattanDistance(beacon);
         }
 
         /*
@@ -197,7 +197,7 @@ public class Day15 {
             final int maxDistance = calculateManhattanDistance();
 
             final Coordinate startingPoint = new Coordinate(location.x(), y);
-            final int distanceToStartingPoint = calculateManhattanDistance(location, startingPoint);
+            final int distanceToStartingPoint = location.calculateManhattanDistance(startingPoint);
             if (distanceToStartingPoint > maxDistance)
                 return Optional.empty(); // I think we don't care?
 
@@ -227,13 +227,6 @@ public class Day15 {
             final Coordinate sensor = new Coordinate(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)));
             final Coordinate beacon = new Coordinate(Integer.parseInt(matcher.group(3)), Integer.parseInt(matcher.group(4)));
             return new Sensor(sensor, beacon);
-        }
-
-        /*
-         * Calculate the Manhattan Distance between two `Coordinate`s.
-         */
-        private static int calculateManhattanDistance(final Coordinate from, final Coordinate to) {
-            return Math.abs(from.x() - to.x()) + Math.abs(from.y() - to.y());
         }
 
     }

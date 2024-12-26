@@ -148,10 +148,12 @@ public class Day23 {
             final Cup tmp = new Cup(0);
             final Cup last = IntStream.of(cups)
                     .mapToObj(Cup::new)
-                    .reduce(tmp, (result, next) -> {
-                        result.next = next;
-                        return next;
-                    });
+                    .reduce(
+                            tmp, (result, next) -> {
+                                result.next = next;
+                                return next;
+                            }
+                    );
 
             final Cup root = tmp.next;
             last.next = root;

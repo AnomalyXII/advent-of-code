@@ -1,0 +1,24 @@
+#
+# Main targets
+#
+
+load("@rules_java//java:defs.bzl", "java_import")
+
+filegroup(
+    name = "all-inputs",
+    srcs = [
+        "//solutions/aoc%d:aoc%d/inputs" % (year, year)
+        for year in range(2020, 2025)
+    ],
+    visibility = ["//:__subpackages__"],
+)
+
+java_import(
+    name = "all-solutions",
+    jars = [],
+    exports = [
+        "//solutions/aoc%d" % (year)
+        for year in range(2020, 2025)
+    ],
+    visibility = ["//:__subpackages__"],
+)

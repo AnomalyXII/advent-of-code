@@ -1,5 +1,7 @@
-.idea/
-.gradle/
-build/
+bazel-advent-of-code
+bazel-bin
+bazel-out
+bazel-testlogs
 out/
-!.idea/codeStyles/
+opt/
+generated/

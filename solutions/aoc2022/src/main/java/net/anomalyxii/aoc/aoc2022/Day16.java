@@ -232,21 +232,23 @@ public class Day16 {
         private int distanceTo(final Room from, final Room to) {
             return distanceCache
                     .computeIfAbsent(from, k -> new HashMap<>())
-                    .computeIfAbsent(to, k -> {
-                        final Deque<Room> paths = new ArrayDeque<>();
-                        paths.add(from);
-                        for (int i = 0; i < rooms.size(); i++) {
-                            if (paths.contains(to))
-                                return i;
-                            final Set<Room> next = new HashSet<>();
-                            while (!paths.isEmpty()) {
-                                for (final String tunnel : paths.removeFirst().tunnels)
-                                    next.add(findRoom(tunnel));
+                    .computeIfAbsent(
+                            to, k -> {
+                                final Deque<Room> paths = new ArrayDeque<>();
+                                paths.add(from);
+                                for (int i = 0; i < rooms.size(); i++) {
+                                    if (paths.contains(to))
+                                        return i;
+                                    final Set<Room> next = new HashSet<>();
+                                    while (!paths.isEmpty()) {
+                                        for (final String tunnel : paths.removeFirst().tunnels)
+                                            next.add(findRoom(tunnel));
+                                    }
+                                    paths.addAll(next);
+                                }
+                                throw new IllegalStateException("Failed to find valid path from " + from + " to " + to);
                             }
-                            paths.addAll(next);
-                        }
-                        throw new IllegalStateException("Failed to find valid path from " + from + " to " + to);
-                    });
+                    );
         }
     }
 

@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class Day1Test {
 
-    private static final SolutionContext EXAMPLE = SolutionContext.example(2020, 1);
+    private static final SolutionContext EXAMPLE = SolutionContext.example(1);
     private static final SolutionContext LIVE = SolutionContext.live(2020, 1);
 
     // ****************************************

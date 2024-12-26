@@ -1,0 +1,8 @@
+.bazelbsp/
+.idea/
+bazel-advent-of-code
+bazel-out
+bazel-bin
+bazel-testlogs
+opt/
+out/

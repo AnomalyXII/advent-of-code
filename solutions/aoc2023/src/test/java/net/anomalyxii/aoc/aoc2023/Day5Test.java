@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class Day5Test {
 
-    private static final SolutionContext EXAMPLE = SolutionContext.example(2023, 5);
+    private static final SolutionContext EXAMPLE = SolutionContext.example(5);
     private static final SolutionContext LIVE = SolutionContext.live(2023, 5);
 
     // ****************************************
@@ -55,7 +55,7 @@ class Day5Test {
 
         // assert
         assertThat(answer)
-                    .isEqualTo(46);
+                .isEqualTo(46);
     }
 
     @Test
@@ -83,9 +83,9 @@ class Day5Test {
 
         // assert
         assertThat(answer.answer1())
-                    .isEqualTo(35);
+                .isEqualTo(35);
         assertThat(answer.answer2())
-                    .isEqualTo(46);
+                .isEqualTo(46);
     }
 
     @Test

@@ -1,0 +1,32 @@
+#
+# Build Helpers
+#
+
+load("@//build:modules/modules.bzl", "artifact")
+load("@contrib_rules_jvm//java:defs.bzl", "checkstyle_config", "checkstyle_binary")
+load("@contrib_rules_jvm//java:defs.bzl", "spotbugs_config", "spotbugs_binary")
+
+checkstyle_binary(
+    name = "checkstyle-bin",
+    runtime_deps = [ artifact("com.puppycrawl.tools:checkstyle") ],
+)
+
+checkstyle_config(
+    name = "checkstyle-config",
+    checkstyle_binary = ":checkstyle-bin",
+    config_file = "config/checkstyle/checkstyle.xml",
+    data = [ "config/checkstyle/suppress.xml" ],
+    visibility = ["//visibility:public"],
+)
+
+spotbugs_binary(
+    name = "spotbugs-bin",
+    runtime_deps = [ artifact("com.github.spotbugs:spotbugs") ],
+)
+
+spotbugs_config(
+    name = "spotbugs-config",
+    spotbugs_binary = ":spotbugs-bin",
+    exclude_filter = "config/spotbugs/suppress.xml",
+    visibility = [ "//visibility:public" ],
+)

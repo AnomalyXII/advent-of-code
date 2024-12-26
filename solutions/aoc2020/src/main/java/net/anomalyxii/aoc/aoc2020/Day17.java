@@ -79,29 +79,33 @@ public class Day17 {
                 mutatedLayers[z] = copyAndGrowLayer(mutatedLayers[z]);
             }
 
-            updateEachCubeInLayer(mutatedLayers, (x, y, z, c) -> {
-                final int surroundingCubes = countSurroundingCubes(mutatedLayers, x, y, z);
+            updateEachCubeInLayer(
+                    mutatedLayers, (x, y, z, c) -> {
+                        final int surroundingCubes = countSurroundingCubes(mutatedLayers, x, y, z);
 
-                if (c == '.' && (surroundingCubes == 3)) {
-                    // Activating
-                    activeCubes.addAndGet(computeCountModifier(z));
-                    return '!';
-                }
+                        if (c == '.' && (surroundingCubes == 3)) {
+                            // Activating
+                            activeCubes.addAndGet(computeCountModifier(z));
+                            return '!';
+                        }
 
-                if (c == '#' && (surroundingCubes < 2 || surroundingCubes > 3)) {
-                    // Deactivating
-                    activeCubes.addAndGet(-computeCountModifier(z));
-                    return '~';
-                }
+                        if (c == '#' && (surroundingCubes < 2 || surroundingCubes > 3)) {
+                            // Deactivating
+                            activeCubes.addAndGet(-computeCountModifier(z));
+                            return '~';
+                        }
 
-                return c;
-            });
+                        return c;
+                    }
+            );
 
-            updateEachCubeInLayer(mutatedLayers, (x, y, z, c) -> {
-                if (c == '~') return '.';
-                if (c == '!') return '#';
-                return c;
-            });
+            updateEachCubeInLayer(
+                    mutatedLayers, (x, y, z, c) -> {
+                        if (c == '~') return '.';
+                        if (c == '!') return '#';
+                        return c;
+                    }
+            );
 
             allLayers = mutatedLayers;
         }
@@ -131,29 +135,33 @@ public class Day17 {
                 }
             }
 
-            updateEachCubeInLayer(mutatedLayers, (x, y, z, w, c) -> {
-                final int surroundingCubes = countSurroundingCubes(mutatedLayers, x, y, z, w);
+            updateEachCubeInLayer(
+                    mutatedLayers, (x, y, z, w, c) -> {
+                        final int surroundingCubes = countSurroundingCubes(mutatedLayers, x, y, z, w);
 
-                if (c == '.' && (surroundingCubes == 3)) {
-                    // Activating...
-                    activeCubes.addAndGet(computeCountModifier(z, w));
-                    return '!';
-                }
+                        if (c == '.' && (surroundingCubes == 3)) {
+                            // Activating...
+                            activeCubes.addAndGet(computeCountModifier(z, w));
+                            return '!';
+                        }
 
-                if (c == '#' && (surroundingCubes < 2 || surroundingCubes > 3)) {
-                    // Deactivating...
-                    activeCubes.addAndGet(-computeCountModifier(z, w));
-                    return '~';
-                }
+                        if (c == '#' && (surroundingCubes < 2 || surroundingCubes > 3)) {
+                            // Deactivating...
+                            activeCubes.addAndGet(-computeCountModifier(z, w));
+                            return '~';
+                        }
 
-                return c;
-            });
+                        return c;
+                    }
+            );
 
-            updateEachCubeInLayer(mutatedLayers, (x, y, z, w, c) -> {
-                if (c == '~') return '.';
-                if (c == '!') return '#';
-                return c;
-            });
+            updateEachCubeInLayer(
+                    mutatedLayers, (x, y, z, w, c) -> {
+                        if (c == '~') return '.';
+                        if (c == '!') return '#';
+                        return c;
+                    }
+            );
 
 
             allLayers = mutatedLayers;

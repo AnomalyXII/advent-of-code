@@ -2,6 +2,7 @@ package net.anomalyxii.aoc;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Load all available {@link Solutions}.
@@ -35,5 +36,38 @@ public interface SolutionLoader {
      * @return the {@link Challenge} for the given year and day
      */
     Optional<Challenge<?, ?>> findChallenge(int year, int day);
+
+    // ****************************************
+    // Default Methods
+    // ****************************************
+
+    /**
+     * Get the {@link Challenge challenges} for a given year.
+     *
+     * @param maybeYear the year to filter to
+     * @return all {@link Challenge Challenges}
+     */
+    default Set<Challenge<?, ?>> allChallenges(final Integer maybeYear) {
+        return maybeYear == null ? allChallenges() : allChallengesForYear(maybeYear);
+    }
+
+    /**
+     * Get the {@link Challenge challenges} for a given year and/or day.
+     *
+     * @param maybeYear the year to filter to
+     * @param maybeDay  the day to filter to
+     * @return all {@link Challenge Challenges}
+     */
+    default Set<Challenge<?, ?>> allChallenges(final Integer maybeYear, final Integer maybeDay) {
+        return maybeDay == null
+                ? allChallenges(maybeYear)
+                : maybeYear == null
+                        ? allChallenges().stream()
+                            .filter(challenge -> challenge.matches(null, maybeDay))
+                            .collect(Collectors.toSet())
+                        : findChallenge(maybeYear, maybeDay).stream()
+                                .collect(Collectors.toSet());
+    }
+
 
 }

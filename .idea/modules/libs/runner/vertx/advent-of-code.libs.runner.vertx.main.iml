@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../../../libs/runner/vertx/src/main">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../../libs/runner/vertx/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../../libs/runner/vertx/src/main/resources" type="java-resource" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="advent-of-code.libs.framework.core.main" />
+    <orderEntry type="module" module-name="advent-of-code.solutions.aoc2020.main" scope="RUNTIME" />
+    <orderEntry type="module" module-name="advent-of-code.solutions.aoc2021.main" scope="RUNTIME" />
+    <orderEntry type="module" module-name="advent-of-code.solutions.aoc2022.main" scope="RUNTIME" />
+    <orderEntry type="module" module-name="advent-of-code.solutions.aoc2023.main" scope="RUNTIME" />
+    <orderEntry type="module" module-name="advent-of-code.solutions.aoc2024.main" scope="RUNTIME" />
+    <orderEntry type="library" name="org.slf4j:slf4j-api:2.0.12" level="project" />
+    <orderEntry type="library" name="io.vertx:vertx-core:4.5.10" level="project" />
+    <orderEntry type="library" name="io.vertx:vertx-web:4.5.10" level="project" />
+    <orderEntry type="library" name="io.vertx:vertx-web-templ-thymeleaf:4.5.10" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="org.slf4j:slf4j-simple:2.0.12" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="com.fasterxml.jackson.core:jackson-databind:2.17.0" level="project" />
+  </component>
+</module>

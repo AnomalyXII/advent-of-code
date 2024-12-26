@@ -86,8 +86,8 @@ public class Day12 {
      * on the left-hand side and a `,` on the right.
      */
     static String[] unfoldLine(final String[] parts) {
-        final String unfoldedRecord = "%1$s?%1$s?%1$s?%1$s?%1$s" .formatted(parts[0]);
-        final String unfoldedArrangement = "%1$s,%1$s,%1$s,%1$s,%1$s" .formatted(parts[1]);
+        final String unfoldedRecord = "%1$s?%1$s?%1$s?%1$s?%1$s".formatted(parts[0]);
+        final String unfoldedArrangement = "%1$s,%1$s,%1$s,%1$s,%1$s".formatted(parts[1]);
         return new String[]{unfoldedRecord, unfoldedArrangement};
     }
 

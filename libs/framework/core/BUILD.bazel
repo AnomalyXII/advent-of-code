@@ -1,0 +1,15 @@
+#
+# Framework: Core
+#
+
+load("@//build:modules/modules.bzl", "aoc_library")
+
+aoc_library(
+    name = "core",
+    deps = [
+        "//libs/codegen/annotations",
+        # TODO: maybe these can be better decoupled?
+        "//libs/framework/utils-geometry",
+        "//libs/framework/utils-ocr",
+    ],
+)

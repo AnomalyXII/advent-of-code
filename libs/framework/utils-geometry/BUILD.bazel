@@ -1,0 +1,30 @@
+#
+# Framework: Utilities
+#
+
+load(
+    "@//build:modules/modules.bzl",
+    "artifact",
+    "aoc_library",
+    "aoc_test_suite"
+)
+
+aoc_library(
+    name = "utils-geometry",
+    deps = [],
+)
+
+aoc_test_suite(
+    name = "utils-geometry-test",
+    deps = [
+        ":utils-geometry",
+        artifact("org.assertj:assertj-core"),
+        artifact("org.junit.jupiter:junit-jupiter-api"),
+        artifact("org.junit.jupiter:junit-jupiter-params"),
+    ],
+    runtime_deps = [
+        artifact("org.junit.jupiter:junit-jupiter-engine"),
+        artifact("org.junit.platform:junit-platform-launcher"),
+        artifact("org.junit.platform:junit-platform-reporting"),
+    ],
+)

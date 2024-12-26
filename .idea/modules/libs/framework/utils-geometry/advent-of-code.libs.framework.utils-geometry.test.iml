@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../../../libs/framework/utils-geometry/src/test">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../../libs/framework/utils-geometry/src/test/java" isTestSource="true" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="advent-of-code.libs.framework.utils-geometry.main" />
+    <orderEntry type="library" name="org.assertj:assertj-core:3.24.2" level="project" />
+    <orderEntry type="library" name="org.junit.jupiter:junit-jupiter-api:5.11.1" level="project" />
+    <orderEntry type="library" name="org.junit.jupiter:junit-jupiter-params:5.11.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="org.junit.jupiter:junit-jupiter-engine:5.11.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="org.junit.platform:junit-platform-runner:1.11.1" level="project" />
+  </component>
+</module>
